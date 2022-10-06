@@ -1,4 +1,4 @@
-package com.example.mytracker
+package com.dolnamool.mytracker
 
 import org.junit.Test
 

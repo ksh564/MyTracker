@@ -1,8 +1,9 @@
-package com.example.mytracker
+package com.dolnamool.mytracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.mytracker.ui.main.MainFragment
+import com.example.mytracker.R
+import com.dolnamool.mytracker.view.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.mytracker.ui.main
+package com.dolnamool.mytracker.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
+import androidx.databinding.DataBindingUtil
+import com.dolnamool.mytracker.data.User
 import com.example.mytracker.R
-import org.w3c.dom.Text
+import com.dolnamool.mytracker.ui.main.MainViewModel
+import com.example.mytracker.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
@@ -22,7 +25,9 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding.user = User("testFirstName","testLastName")
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

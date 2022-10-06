@@ -1,4 +1,4 @@
-package com.example.mytracker.ui.main
+package com.dolnamool.mytracker.ui.main
 
 import androidx.lifecycle.ViewModel
 
