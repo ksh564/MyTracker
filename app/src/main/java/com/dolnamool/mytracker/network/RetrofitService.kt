@@ -1,11 +1,13 @@
 package com.dolnamool.mytracker.network
 
+import com.dolnamool.mytracker.data.model.Address
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import java.util.concurrent.TimeUnit
 
 interface RetrofitService {
@@ -14,13 +16,16 @@ interface RetrofitService {
         private var retrofitService: RetrofitService? = null
         fun getInstance(): RetrofitService {
 
-            val httpInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val httpInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
-            val listener = Interceptor { chain -> val original = chain.request()
-                .newBuilder()
-                .header("Accept","application/json")
-                .build()
-                chain.proceed(original) }
+            val listener = Interceptor { chain ->
+                val original = chain.request()
+                    .newBuilder()
+                    .header("Accept", "application/json")
+                    .build()
+                chain.proceed(original)
+            }
 
             val okHttpClient = OkHttpClient.Builder().addInterceptor(listener)
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -33,7 +38,7 @@ interface RetrofitService {
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create()
 
-            if (retrofitService ==  null) {
+            if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
                     .baseUrl("http://118.219.45.141:53000/")
                     .client(okHttpClient)
@@ -44,4 +49,7 @@ interface RetrofitService {
             return retrofitService!!
         }
     }
+
+    @GET("api/getInitData2.php")
+    suspend fun getInitAddressData(): List<Address>
 }
